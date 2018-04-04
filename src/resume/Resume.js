@@ -8,9 +8,11 @@ export default ()=>
         <div>
             <Sidebar/>
         </div>
-        <div className="row">
-            <div className="col-sm-4">
-                Resume
-            </div>
+        <div className="container">
+            <div className="row">
+                <div className="col-sm-4">
+                    Resume
+                </div>
+             </div>
         </div>
     </div>
