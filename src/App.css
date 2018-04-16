@@ -27,6 +27,11 @@
   margin-top:50px;
 }
 
+.patientContainer{
+  margin-left:50px !important;
+  margin-top:50px !important;
+}
+
 .table{
   width:50% !important;
 }
