@@ -67,6 +67,8 @@ export default class GymCalc extends Component{
     }
 
     render(){
+        const {fortyFives, twentyFives, tens, fives, twoPointFives} = this.state;
+
         return(
             <div>
           <Sidebar/>
@@ -88,7 +90,7 @@ export default class GymCalc extends Component{
                               <label>45 lb</label>
                             </td>
                             <td>
-                              <label>{this.state.fortyFives} plates </label>
+                              <label>{fortyFives} plates </label>
                             </td>
                         </tr>
                         <tr>
@@ -96,7 +98,7 @@ export default class GymCalc extends Component{
                                 <label>25 lb</label>
                             </td>
                             <td>
-                                <label>{this.state.twentyFives} plates</label>
+                                <label>{twentyFives} plates</label>
                             </td>
                         </tr>
                       <tr>
@@ -104,7 +106,7 @@ export default class GymCalc extends Component{
                             <label>10 lb</label>
                           </td>
                           <td>
-                            <label>{this.state.tens} plates </label>
+                            <label>{tens} plates </label>
                           </td>
                         </tr>
                       <tr>
@@ -112,7 +114,7 @@ export default class GymCalc extends Component{
                             <label>5 lb</label>
                           </td>
                           <td>
-                            <label>{this.state.fives} plates </label>
+                            <label>{fives} plates </label>
                           </td>
                       </tr>
                       <tr>
@@ -120,7 +122,7 @@ export default class GymCalc extends Component{
                             <label>2.5 lb</label>
                         </td>
                           <td>
-                              <label>{this.state.twoPointFives} plates</label>
+                              <label>{twoPointFives} plates</label>
                           </td>
                       </tr>
                   </tbody>

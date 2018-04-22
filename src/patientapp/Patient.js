@@ -11,12 +11,13 @@ export default class Patient extends Component{
 
         this.state ={
             patient: [],
+            patientList:[],
             patientIDRegistered:'',
             patientID:'',
             firstName:'',
             lastName:'',
             reason:'',
-            doctor:''
+            doctor:'',
 
         }
 
@@ -27,6 +28,25 @@ export default class Patient extends Component{
         fetch(API + 'patient/' + this.state.patientIDRegistered)
             .then(data => data.json())
             .then((data) => this.setState({ patient: data }));
+    }
+
+    loadTable = () => {
+
+        fetch(API + 'patient/')
+            .then(data => data.json())
+            .then((data) => data.map(
+
+                patients => (
+                {
+                    id: '{patients.id}',
+                    firstName: '{patients.firstName}',
+                    lastName: '{patients.lastName}'
+                }
+
+            )))
+            .then(patientList => this.setState({patientList
+              }))
+
     }
 
     //sends off to server/database by fetch API
@@ -71,65 +91,85 @@ export default class Patient extends Component{
         return(
         <div>
             <Sidebar/>
-                <div className="patientContainer row">
-                    <div id="patientPost" className="col-sm-4">
-                            <div>
-                                <label htmlFor="firstName">First Name: </label>
-                                <input id="firstName" type="text" name="firstName" onChange={this.patientRecords}/>
-
-                            </div>
-
-                            <div>
-                                <label htmlFor="lastName">Last Name: </label>
-                                <input id="lastName" type="text"  name="lastName" onChange={this.patientRecords} />
-
-                            </div>
-
-                            <div>
-                                <label htmlFor="symptoms">Symptoms: </label>
-                                <input id="symptoms" type="text" name="reason" onChange={this.patientRecords}/>
-                            </div>
-
-                            <div>
-                                <label htmlFor="doctor">Doctor: </label>
-                                <input id="doctor" type="text" name="doctor" onChange={this.patientRecords}/>
-                            </div>
-
-                            <div>
-                                <button id="submit" onClick={this.patientInput}>Submit</button>
-                            </div>
-                    </div>
-
-
-
-                    {/*Need to research better way to display data from server, looks poor?*/}
-                    <div id="patient" className="pull-right col-sm-4">
+            <div className="patientContainer row">
+                <div id="patientPost" className="col-sm-4">
                         <div>
-                            <label htmlFor="employeeID">Patient ID: </label>
-                            <input id="employeeID" type="text" value={this.state.patient.patientIDRegistered} onChange={this.patientSearch}/>
-                        </div>
-                        <div>
-                            <label htmlFor="firstNameRegistered">First Name:{this.state.patient.firstName} </label>
+                            <label htmlFor="firstName">First Name: </label>
+                            <input id="firstName" type="text" name="firstName" onChange={this.patientRecords}/>
+
                         </div>
 
                         <div>
-                            <label htmlFor="lastNameRegistered">Last Name: {this.state.patient.lastName}</label>
+                            <label htmlFor="lastName">Last Name: </label>
+                            <input id="lastName" type="text"  name="lastName" onChange={this.patientRecords} />
+
                         </div>
 
                         <div>
-                            <label htmlFor="symptomsRegistered">Reason: {this.state.patient.reason} </label>
+                            <label htmlFor="symptoms">Symptoms: </label>
+                            <input id="symptoms" type="text" name="reason" onChange={this.patientRecords}/>
                         </div>
 
                         <div>
-                            <label htmlFor="doctorRegistered">Doctor: {this.state.patient.doctor} </label>
+                            <label htmlFor="doctor">Doctor: </label>
+                            <input id="doctor" type="text" name="doctor" onChange={this.patientRecords}/>
                         </div>
 
                         <div>
-                            <button id="submit" onClick={this.handleClick}>Search</button>
+                            <button id="submit" onClick={this.patientInput}>Submit</button>
                         </div>
-                    </div>
                 </div>
 
+
+
+                {/*Need to research better way to display data from server, looks poor?*/}
+                <div id="patient" className="pull-right col-sm-4">
+                    <div>
+                        <label htmlFor="employeeID">Patient ID: </label>
+                        <input id="employeeID" type="text" value={this.state.patient.patientIDRegistered} onChange={this.patientSearch}/>
+                    </div>
+                    <div>
+                        <label htmlFor="firstNameRegistered">First Name:{this.state.patient.firstName} </label>
+                    </div>
+
+                    <div>
+                        <label htmlFor="lastNameRegistered">Last Name: {this.state.patient.lastName}</label>
+                    </div>
+
+                    <div>
+                        <label htmlFor="symptomsRegistered">Reason: {this.state.patient.reason} </label>
+                    </div>
+
+                    <div>
+                        <label htmlFor="doctorRegistered">Doctor: {this.state.patient.doctor} </label>
+                    </div>
+
+                    <div>
+                        <button id="submit" onClick={this.handleClick}>Search</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div className="patientContainer row">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                        </tr>
+                        <tr>
+                            <td>{this.state.patientList}</td>
+                            <td>{this.state.patientList}</td>
+                            <td>{this.state.patientList}</td>
+                        </tr>
+                    </thead>
+                </table>
+                <div>
+                    <button id="loadTable" onClick={this.loadTable}> Load Table </button>
+                </div>
+            </div>
         </div>
 
         )
