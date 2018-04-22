@@ -34,19 +34,16 @@ export default class Patient extends Component{
 
         fetch(API + 'patient/')
             .then(data => data.json())
-            .then((data) => data.map(
-
-                patients => (
+            .then(parsedJSON => parsedJSON.map(patients => (
                 {
-                    id: '{patients.id}',
-                    firstName: '{patients.firstName}',
-                    lastName: '{patients.lastName}'
+                    id: `${patients.id}`,
+                    name: `${patients.firstName}`,
+                    last: `${patients.lastName}`
                 }
-
             )))
-            .then(patientList => this.setState({patientList
-              }))
-
+            .then(patientList => this.setState({
+                patientList
+            }))
     }
 
     //sends off to server/database by fetch API
@@ -88,45 +85,45 @@ export default class Patient extends Component{
 
 
     render(){
-        return(
-        <div>
+        const {patientList} = this.state;
+        return <div>
             <Sidebar/>
             <div className="patientContainer row">
                 <div id="patientPost" className="col-sm-4">
-                        <div>
-                            <label htmlFor="firstName">First Name: </label>
-                            <input id="firstName" type="text" name="firstName" onChange={this.patientRecords}/>
+                    <div>
+                        <label htmlFor="firstName">First Name: </label>
+                        <input id="firstName" type="text" name="firstName" onChange={this.patientRecords}/>
 
-                        </div>
+                    </div>
 
-                        <div>
-                            <label htmlFor="lastName">Last Name: </label>
-                            <input id="lastName" type="text"  name="lastName" onChange={this.patientRecords} />
+                    <div>
+                        <label htmlFor="lastName">Last Name: </label>
+                        <input id="lastName" type="text" name="lastName" onChange={this.patientRecords}/>
 
-                        </div>
+                    </div>
 
-                        <div>
-                            <label htmlFor="symptoms">Symptoms: </label>
-                            <input id="symptoms" type="text" name="reason" onChange={this.patientRecords}/>
-                        </div>
+                    <div>
+                        <label htmlFor="symptoms">Symptoms: </label>
+                        <input id="symptoms" type="text" name="reason" onChange={this.patientRecords}/>
+                    </div>
 
-                        <div>
-                            <label htmlFor="doctor">Doctor: </label>
-                            <input id="doctor" type="text" name="doctor" onChange={this.patientRecords}/>
-                        </div>
+                    <div>
+                        <label htmlFor="doctor">Doctor: </label>
+                        <input id="doctor" type="text" name="doctor" onChange={this.patientRecords}/>
+                    </div>
 
-                        <div>
-                            <button id="submit" onClick={this.patientInput}>Submit</button>
-                        </div>
+                    <div>
+                        <button id="submit" onClick={this.patientInput}>Submit</button>
+                    </div>
                 </div>
-
 
 
                 {/*Need to research better way to display data from server, looks poor?*/}
                 <div id="patient" className="pull-right col-sm-4">
                     <div>
                         <label htmlFor="employeeID">Patient ID: </label>
-                        <input id="employeeID" type="text" value={this.state.patient.patientIDRegistered} onChange={this.patientSearch}/>
+                        <input id="employeeID" type="text" value={this.state.patient.patientIDRegistered}
+                               onChange={this.patientSearch}/>
                     </div>
                     <div>
                         <label htmlFor="firstNameRegistered">First Name:{this.state.patient.firstName} </label>
@@ -154,24 +151,28 @@ export default class Patient extends Component{
             <div className="patientContainer row">
                 <table className="table">
                     <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                        </tr>
-                        <tr>
-                            <td>{this.state.patientList}</td>
-                            <td>{this.state.patientList}</td>
-                            <td>{this.state.patientList}</td>
-                        </tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                    </tr>
+                        {
+                            patientList.length > 0 ? patientList.map(patients => {
+                                // destructed patients.variable, new thing learned
+                                const {id,name,last} = patients;
+                                return <tr key={id}>
+                                            <td>{id}</td>
+                                            <td>{name}</td>
+                                            <td>{last}</td>
+                                        </tr>
+                            }) : null
+                        }
                     </thead>
                 </table>
                 <div>
-                    <button id="loadTable" onClick={this.loadTable}> Load Table </button>
+                    <button id="loadTable" onClick={this.loadTable}> Load Table</button>
                 </div>
             </div>
         </div>
-
-        )
     }
 }

@@ -39,6 +39,20 @@
 #github{
   float:right;
 }
+
+#dateProgrammer{
+    text-align:right;
+    font-weight: bolder;
+}
+
+#dateJuniorProgrammer{
+    text-align:right;
+    font-weight: bolder;
+}
+
+#jobTitles{
+    font-weight: bolder;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
