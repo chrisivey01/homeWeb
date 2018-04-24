@@ -34,11 +34,11 @@ export default class Patient extends Component{
 
         fetch(API + 'patient/')
             .then(data => data.json())
-            .then(parsedJSON => parsedJSON.map(patients => (
+            .then(parsedJSON => parsedJSON.map(patient => (
                 {
-                    id: `${patients.id}`,
-                    name: `${patients.firstName}`,
-                    last: `${patients.lastName}`
+                    id: patient.id,
+                    name: patient.firstName,
+                    last: patient.lastName
                 }
             )))
             .then(patientList => this.setState({
@@ -85,7 +85,7 @@ export default class Patient extends Component{
 
 
     render(){
-        const {patientList} = this.state;
+        const {patientList, patient} = this.state;
         return <div>
             <Sidebar/>
             <div className="patientContainer row">
@@ -122,23 +122,23 @@ export default class Patient extends Component{
                 <div id="patient" className="pull-right col-sm-4">
                     <div>
                         <label htmlFor="employeeID">Patient ID: </label>
-                        <input id="employeeID" type="text" value={this.state.patient.patientIDRegistered}
+                        <input id="employeeID" type="text" value={patient.patientIDRegistered}
                                onChange={this.patientSearch}/>
                     </div>
                     <div>
-                        <label htmlFor="firstNameRegistered">First Name:{this.state.patient.firstName} </label>
+                        <label htmlFor="firstNameRegistered">First Name:{patient.firstName} </label>
                     </div>
 
                     <div>
-                        <label htmlFor="lastNameRegistered">Last Name: {this.state.patient.lastName}</label>
+                        <label htmlFor="lastNameRegistered">Last Name: {patient.lastName}</label>
                     </div>
 
                     <div>
-                        <label htmlFor="symptomsRegistered">Reason: {this.state.patient.reason} </label>
+                        <label htmlFor="symptomsRegistered">Reason: {patient.reason} </label>
                     </div>
 
                     <div>
-                        <label htmlFor="doctorRegistered">Doctor: {this.state.patient.doctor} </label>
+                        <label htmlFor="doctorRegistered">Doctor: {patient.doctor} </label>
                     </div>
 
                     <div>
