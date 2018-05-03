@@ -38,8 +38,15 @@ export default class GymCalc extends Component{
 
         let bar = 45;
         weight = weight - bar;
-
-        while (weight > 0) {
+        if(weight < 0)
+            alert('Minimum weight of 45 not met.  Can\'t even do the bar.  SMH')
+        else if(weight == 0)
+            alert('Really???  All you can do is the bar?')
+        else if(weight < 5)
+            alert('Not even a couple 2.5\'s!!!')
+        else if(weight > 955)
+            alert('Yeah right,  You need two bars for that!!!')
+        else while (weight > 0) {
             if (weight >= 90) {
                 weight = weight - 90;
                 fortyFives += 2;
@@ -77,7 +84,7 @@ export default class GymCalc extends Component{
                       <thead>
                         <tr>
                           <th>
-                              <input id="weightCalc" placeholder="Total weights" value={this.state.weight} onChange={this.weightTotal}/>
+                              <input type="number" id="weightCalc" placeholder="Total weights" value={this.state.weight} onChange={this.weightTotal}/>
                           </th>
                             <th>
                                 <button className="btn btn-primary active" onClick={this.calculateWeight}>Calculate</button>

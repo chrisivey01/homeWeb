@@ -5,6 +5,7 @@ import Home from '../home/Home'
 import Resume from '../resume/Resume'
 import GymCalc from '../gymcalc/GymCalc'
 import Patient from '../patientapp/Patient'
+import Projects from '../Projects/Projects'
 
 
 export default () => (
@@ -12,8 +13,9 @@ export default () => (
         <Switch>
             <Route path="/" exact component={Home}/>
             <Route path="/resume" exact component={Resume}/>
-            <Route path="/test" exact component={Patient}/>
+            <Route path="/patient" exact component={Patient}/>
             <Route path="/gymcalc" exact component={GymCalc}/>
+            <Route path="/projects" exact component={Projects}/>
         </Switch>
     </BrowserRouter>
 

@@ -18,11 +18,14 @@ export default () =>
                 <li className="nav-item">
                     <Link to='/resume' className="nav-link" >Resume</Link>
                 </li>
+                {/*<li className="nav-item">*/}
+                    {/*<Link to='/patient' className="nav-link">Patient App</Link>*/}
+                {/*</li>*/}
+                {/*<li className="nav-item">*/}
+                    {/*<Link to='/gymcalc' className="nav-link">Gym Calculator</Link>*/}
+                {/*</li>*/}
                 <li className="nav-item">
-                    <Link to='/test' className="nav-link">Test</Link>
-                </li>
-                <li className="nav-item">
-                    <Link to='/gymcalc' className="nav-link">Gym Calculator</Link>
+                    <Link to='/projects' className="nav-link">Projects</Link>
                 </li>
             </ul>
         </div>

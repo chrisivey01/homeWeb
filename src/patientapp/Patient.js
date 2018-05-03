@@ -18,16 +18,30 @@ export default class Patient extends Component{
             lastName:'',
             reason:'',
             doctor:'',
+            first_name:'',
+            last_name:'',
+            patient_id:''
 
         }
 
     }
 
     //fetch get
+    //need help here on how to receive and how to display the data correctly.
+    //see line 134 of jsx where that begins
     handleClick = () => {
         fetch(API + 'patient/' + this.state.patientIDRegistered)
             .then(data => data.json())
-            .then((data) => this.setState({ patient: data }));
+            .then(parsedJSON => parsedJSON.map(patient => (
+                {
+                    patient_id: patient.patient_id,
+                    first_name: patient.first_name,
+                    last_name: patient.last_name,
+                    doctor: patient.doctor,
+                    reason: patient.reason
+                }
+            )))
+                .then(patient => this.setState({ patient }))
     }
 
     loadTable = () => {
@@ -36,9 +50,9 @@ export default class Patient extends Component{
             .then(data => data.json())
             .then(parsedJSON => parsedJSON.map(patient => (
                 {
-                    id: patient.id,
-                    name: patient.firstName,
-                    last: patient.lastName
+                    id: patient.patient_id,
+                    name: patient.first_name,
+                    last: patient.last_name
                 }
             )))
             .then(patientList => this.setState({
@@ -126,11 +140,11 @@ export default class Patient extends Component{
                                onChange={this.patientSearch}/>
                     </div>
                     <div>
-                        <label htmlFor="firstNameRegistered">First Name:{patient.firstName} </label>
+                        <label htmlFor="firstNameRegistered">First Name:{patient.first_name} </label>
                     </div>
 
                     <div>
-                        <label htmlFor="lastNameRegistered">Last Name: {patient.lastName}</label>
+                        <label htmlFor="lastNameRegistered">Last Name: {patient.last_name}</label>
                     </div>
 
                     <div>
