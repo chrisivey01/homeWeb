@@ -27,21 +27,22 @@ export default class Patient extends Component{
     }
 
     //fetch get
-    //need help here on how to receive and how to display the data correctly.
+    // works but not happy with it at all....
     //see line 134 of jsx where that begins
     handleClick = () => {
         fetch(API + 'patient/' + this.state.patientIDRegistered)
             .then(data => data.json())
-            .then(parsedJSON => parsedJSON.map(patient => (
-                {
-                    patient_id: patient.patient_id,
-                    first_name: patient.first_name,
-                    last_name: patient.last_name,
-                    doctor: patient.doctor,
-                    reason: patient.reason
-                }
-            )))
-                .then(patient => this.setState({ patient }))
+            .then(patient => (
+            {
+                first_name: patient[0].first_name,
+                last_name: patient[0].last_name,
+                doctor: patient[0].doctor,
+                reason: patient[0].reason
+            }
+
+            ))
+            .then(patient => this.setState({ patient }
+            ))
     }
 
     loadTable = () => {
